@@ -1,0 +1,66 @@
+import 'dart:ui';
+
+class PokemonConstant {
+  static const Map<String, Color> color = {
+    'normal': Color(0xFFA8A77A),
+    'fire': Color(0xFFEE8130),
+    'water': Color(0xFF6390F0),
+    'electric': Color(0xFFF7D02C),
+    'grass': Color(0xFF7AC74C),
+    'ice': Color(0xFF96D9D6),
+    'fighting': Color(0xFFC22E28),
+    'poison': Color(0xFFA33EA1),
+    'ground': Color(0xFFE2BF65),
+    'flying': Color(0xFFA98FF3),
+    'psychic': Color(0xFFF95587),
+    'bug': Color(0xFFA6B91A),
+    'rock': Color(0xFFB6A136),
+    'ghost': Color(0xFF735797),
+    'dragon': Color(0xFF6F35FC),
+    'dark': Color(0xFF705746),
+    'steel': Color(0xFFB7B7CE),
+    'fairy': Color(0xFFD685AD),
+  };
+
+  static const Map<String, String> typeIcon = {
+    'normal': 'assets/images/Pokemon_Type_Icon_Normal.png',
+    'fire': 'assets/images/Pokemon_Type_Icon_Fire.png',
+    'water': 'assets/images/Pokemon_Type_Icon_Water.png',
+    'electric': 'assets/images/Pokemon_Type_Icon_Electric.png',
+    'grass': 'assets/images/Pokemon_Type_Icon_Grass.png',
+    'ice': 'assets/images/Pokemon_Type_Icon_Ice.png',
+    'fighting': 'assets/images/Pokemon_Type_Icon_Fighting.png',
+    'poison': 'assets/images/Pokemon_Type_Icon_Poison.png',
+    'ground': 'assets/images/Pokemon_Type_Icon_Ground.png',
+    'flying': 'assets/images/Pokemon_Type_Icon_Flying.png',
+    'psychic': 'assets/images/Pokemon_Type_Icon_Psychic.png',
+    'bug': 'assets/images/Pokemon_Type_Icon_Bug.png',
+    'rock': 'assets/images/Pokemon_Type_Icon_Rock.png',
+    'ghost': 'assets/images/Pokemon_Type_Icon_Ghost.png',
+    'dragon': 'assets/images/Pokemon_Type_Icon_Dragon.png',
+    'dark': 'assets/images/Pokemon_Type_Icon_Dark.png',
+    'steel': 'assets/images/Pokemon_Type_Icon_Steel.png',
+    'fairy': 'assets/images/Pokemon_Type_Icon_Fairy.png',
+  };
+
+  static const Map<String, List<Color>> gradintColor = {
+    'normal': [Color(0xFFB0A485), Color(0xFFC3B8A0)],
+    'fire': [Color(0xFFF1B366), Color(0xFFE6612C)],
+    'water': [Color(0xFF74CCF4), Color(0xFF3788E9)],
+    'electric': [Color(0xFFFBE96E), Color(0xFFF1BC33)],
+    'grass': [Color(0xFFA8E36F), Color(0xFF4AB143)],
+    'ice': [Color(0xFF74CCF4), Color(0xFF3889E9)],
+    'fighting': [Color(0xFFB36157), Color(0xFF7D322D)],
+    'poison': [Color(0xFFCB84CF), Color(0xFF8440A0)],
+    'ground': [Color(0xFFD6C388), Color(0xFFB8914B)],
+    'flying': [Color(0xFFB3D1F7), Color(0xFF7AA0F2)],
+    'psychic': [Color(0xFFF7A9BB), Color(0xFFF35284)],
+    'bug': [Color(0xFFC1CD5F), Color(0xFF859C2A)],
+    'rock': [Color(0xFFBBA181), Color(0xFF926746)],
+    'ghost': [Color(0xFFA88ACD), Color(0xFF65549D)],
+    'dragon': [Color(0xFF7A87E8), Color(0xFF65549D)],
+    'dark': [Color(0xFF746461), Color(0xFF433737)],
+    'steel': [Color(0xFFCAC9D4), Color(0xFF8B88A7)],
+    'fairy': [Color(0xFFFBC7F3), Color(0xFFF88DE9)],
+  };
+}
