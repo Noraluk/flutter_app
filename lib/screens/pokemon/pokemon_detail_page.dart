@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:random_app/constants/pokemon_constant.dart';
@@ -84,7 +82,7 @@ class PokemonDetailPage extends GetView<PokemonDetailController> {
                         ),
                       ),
                       GestureDetector(
-                        onTap: () => log('save favorite'),
+                        onTap: () => debugPrint('save favorite'),
                         child: const Icon(
                           Icons.favorite_border_sharp,
                           color: Colors.white,
@@ -976,6 +974,8 @@ class PokemonMoves extends StatelessWidget {
                   ],
                 ),
                 const Divider(height: 15),
+                if (controller.pokemonMoves.length >= 10)
+                  const Text('display only 10 moves'),
               ],
             );
           },

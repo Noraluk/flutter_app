@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:random_app/constants/pokemon_constant.dart';
@@ -21,25 +18,23 @@ class PokemonsPage extends GetView<PokemonsController> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        leadingWidth: 40,
-        leading: IconButton(
-          onPressed: () => Get.back(),
-          icon: const Padding(
-            padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-            child: Icon(Icons.arrow_back_outlined),
+        titleSpacing: 0,
+        title: Padding(
+          padding: const EdgeInsets.only(left: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              GestureDetector(
+                child: const Icon(
+                  Icons.arrow_back_outlined,
+                  color: Colors.black,
+                ),
+              ),
+            ],
           ),
         ),
         scrolledUnderElevation: 0.0,
         backgroundColor: Colors.transparent,
-        actions: [
-          IconButton(
-            onPressed: () => log(''),
-            icon: const Icon(Icons.menu),
-          ),
-          const SizedBox(
-            width: 20,
-          )
-        ],
       ),
       body: SafeArea(
         child: Padding(
@@ -70,9 +65,6 @@ class PokemonsPage extends GetView<PokemonsController> {
                       shrinkWrap: true,
                       itemCount: controller.pokemons.length,
                       itemBuilder: (BuildContext context, int i) {
-                        if (i == controller.pokemons.length - 1) {
-                          return const CupertinoActivityIndicator();
-                        }
                         return GestureDetector(
                           onTap: () => Get.toNamed(
                             PokemonDetailPage.route.replaceFirst(
@@ -157,6 +149,95 @@ class PokemonsPage extends GetView<PokemonsController> {
               )
             ],
           ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          controller.clearFilter();
+          showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  scrollable: true,
+                  title: const Text('FILTER'),
+                  content: Form(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('POKEMON NAME'),
+                        TextFormField(
+                          onChanged: (value) {
+                            controller.changeName(value);
+                          },
+                          decoration: const InputDecoration(
+                            hintText: "Name",
+                            icon: Icon(Icons.catching_pokemon),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        const Text('POKEMON ELEMENT'),
+                        const SizedBox(height: 10),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: List.generate(
+                              controller.pokemonElements.length,
+                              (index) {
+                                return Row(
+                                  children: [
+                                    Obx(
+                                      () => GestureDetector(
+                                        onTap: () =>
+                                            controller.selectType(index),
+                                        child: SizedBox(
+                                          width: 50,
+                                          height: 50,
+                                          child: Stack(
+                                            children: [
+                                              Image.asset(
+                                                controller
+                                                    .pokemonElements[index]
+                                                    .iconPath,
+                                              ),
+                                              if (controller
+                                                  .pokemonElements[index]
+                                                  .isSelected)
+                                                Icon(
+                                                  Icons.check_circle_rounded,
+                                                  color: Colors.black
+                                                      .withOpacity(0.5),
+                                                  size: 50,
+                                                )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 10),
+                                  ],
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  actions: [
+                    ElevatedButton(
+                      child: const Text("submit"),
+                      onPressed: () {
+                        controller.submitFilter();
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                );
+              });
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Image.asset('assets/images/filter.png'),
         ),
       ),
     );

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:random_app/models/pokemon/base_stat_model.dart';
@@ -7,7 +5,6 @@ import 'package:random_app/models/pokemon/pokemon_characteristic_response_model.
 import 'package:random_app/models/pokemon/pokemon_evolution_chain_response_model.dart';
 import 'package:random_app/models/pokemon/pokemon_model.dart';
 import 'package:random_app/models/pokemon/pokemon_move_response_model.dart';
-import 'package:random_app/models/pokemon/pokemon_moves_model.dart';
 import 'package:random_app/models/pokemon/pokemon_species_response._model.dart';
 import 'package:random_app/services/pokemon/pokemon_service.dart';
 
@@ -17,7 +14,7 @@ class PokemonDetailController extends GetxController {
   Pokemon? pokemon;
   Pokemon? secondPokemonForm;
   Pokemon? thridPokemonForm;
-  RxString personality = ''.obs;
+  RxString personality = '???'.obs;
   PokemonSpeciesResponse? pokemonSpeciesResponse;
   BaseStat? baseStat;
   PokemonEvolutionChainResponse? pokemonEvolutionChainResponse;
@@ -47,9 +44,11 @@ class PokemonDetailController extends GetxController {
 
       PokemonCharacteristicResponse? characteristic =
           await PokemonService.fetchPokemonCharacteristic(pokemon!.id);
-      personality.value = characteristic!.descriptions
-          .firstWhere((description) => description.language.name == 'en')
-          .description;
+      if (characteristic != null) {
+        personality.value = characteristic.descriptions
+            .firstWhere((description) => description.language.name == 'en')
+            .description;
+      }
 
       pokemonSpeciesResponse =
           await PokemonService.fetchPokemonSpecies(pokemon!.id);
@@ -92,15 +91,18 @@ class PokemonDetailController extends GetxController {
         }
       }
 
-      for (PokemonMoves m in pokemon!.moves) {
+      for (final (i, m) in pokemon!.moves.indexed) {
         PokemonMoveResponse? pokemonMoveResponse =
             await PokemonService.fetchPokemonMove(m.move.url);
         if (pokemonMoveResponse != null) {
           pokemonMoves.add(pokemonMoveResponse);
         }
+        if (i == 10) {
+          break;
+        }
       }
     } catch (e) {
-      log('Error while getting data is $e');
+      debugPrint('Error while getting data is $e');
     } finally {
       isLoading(false);
     }

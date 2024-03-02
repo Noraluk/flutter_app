@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:random_app/models/pokemon/pokemon_characteristic_response_model.dart';
 import 'package:random_app/models/pokemon/pokemon_evolution_chain_response_model.dart';
@@ -22,7 +22,7 @@ class PokemonService {
         throw Exception('Failed to load pokemons');
       }
     } catch (e) {
-      log('Failed to load pokemons $e');
+      debugPrint('Failed to load pokemons $e');
     }
     return null;
   }
@@ -38,7 +38,7 @@ class PokemonService {
         throw Exception('Failed to load pokemon');
       }
     } catch (e) {
-      log('Failed to load pokemon $e');
+      debugPrint('Failed to load pokemon $e');
     }
     return null;
   }
@@ -53,10 +53,10 @@ class PokemonService {
         return PokemonCharacteristicResponse.fromJson(
             jsonDecode(response.body) as Map<String, dynamic>);
       } else {
-        throw Exception('Failed to load');
+        throw Exception('Failed to load characeristic');
       }
     } catch (e) {
-      log('Failed to load $e');
+      debugPrint('Failed to load $e');
     }
     return null;
   }
@@ -71,10 +71,10 @@ class PokemonService {
         return PokemonSpeciesResponse.fromJson(
             jsonDecode(response.body) as Map<String, dynamic>);
       } else {
-        throw Exception('Failed to load');
+        throw Exception('Failed to load species');
       }
     } catch (e) {
-      log('Failed to load $e');
+      debugPrint('Failed to load $e');
     }
     return null;
   }
@@ -88,10 +88,10 @@ class PokemonService {
         return PokemonEvolutionChainResponse.fromJson(
             jsonDecode(response.body) as Map<String, dynamic>);
       } else {
-        throw Exception('Failed to load');
+        throw Exception('Failed to load evolution chain');
       }
     } catch (e) {
-      log('Failed to load $e');
+      debugPrint('Failed to load $e');
     }
     return null;
   }
@@ -105,10 +105,10 @@ class PokemonService {
         return PokemonMoveResponse.fromJson(
             jsonDecode(response.body) as Map<String, dynamic>);
       } else {
-        throw Exception('Failed to load');
+        throw Exception('Failed to load move');
       }
     } catch (e) {
-      log('Failed to load $e');
+      debugPrint('Failed to load $e');
     }
     return null;
   }
